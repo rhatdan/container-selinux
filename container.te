@@ -1,4 +1,4 @@
-policy_module(container, 2.119.1)
+policy_module(container, 2.119.2)
 gen_require(`
 	class passwd rootok;
 	type container_file_t;
@@ -113,6 +113,7 @@ allow container_runtime_t self:passwd rootok;
 allow container_runtime_t self:fd use;
 allow container_runtime_t self:file mounton;
 
+allow container_runtime_t self:lnk_file manage_lnk_file_perms;
 allow container_runtime_t self:fifo_file rw_fifo_file_perms;
 allow container_runtime_t self:fifo_file manage_file_perms;
 allow container_runtime_t self:msg all_msg_perms;
