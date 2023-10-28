@@ -1,4 +1,4 @@
-policy_module(container, 2.224.0)
+policy_module(container, 2.225.0)
 
 gen_require(`
 	class passwd rootok;
@@ -1550,3 +1550,10 @@ tunable_policy(`deny_ptrace',`',`
 	allow container_domain self:process ptrace;
 	allow spc_t self:process ptrace;
 ')
+
+gen_require(`
+	role unconfined_r;
+')
+allow container_init_t locale_t:filesystem unmount;
+dev_unmount_sysfs_fs(container_init_t)
+fs_unmount_nfsd_fs(container_init_t)
